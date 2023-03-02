@@ -8,7 +8,7 @@ import { history } from './shared/history'
 
 
 const router = createRouter({
-    history: history,
+    history,
     routes, 
 })
 
