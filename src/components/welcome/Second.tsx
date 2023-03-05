@@ -1,11 +1,11 @@
-import { defineComponent, ref } from "vue";
+
+import { FunctionalComponent } from 'vue';
 import s from './WelcomeLayout.module.scss';
 import clock from '../../assets/icons/clock.svg'
 import { RouterLink } from 'vue-router';
 import { WelcomeLayout } from './WelcomeLayout'
-export const Second = defineComponent({
-    setup: (props, context) => {
-        const slots = {
+export const Second: FunctionalComponent = () => {
+  return <WelcomeLayout>{{ 
             icon: () => <img class={s.icon} src={clock} />,
             title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
             buttons: () => 
@@ -14,9 +14,6 @@ export const Second = defineComponent({
               <RouterLink to="/welcome/3" >下一页</RouterLink>
               <RouterLink to="/start" >跳过</RouterLink>
             </>
-          }
-        return () => (
-           <WelcomeLayout v-slots={slots}></WelcomeLayout>
-        )
-    }
-})
+   }}</WelcomeLayout>
+}
+Second.displayName = 'Second'
