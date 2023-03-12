@@ -9,15 +9,16 @@ export const svgstore = (options = {}) => {
     return {
             name: 'svgstore',
             resolveId(id) {
+                // 为了兼容编辑器 因为svg_bundle.js 一开始并不存在
                 if (id === '@svgstore') {
                     return 'svg_bundle.js'
                 }
             },
             load(id) {
                 if (id === 'svg_bundle.js') {
-                        const sprites = store(options);
-                        const iconsDir = path.resolve(inputFolder);
-                        for (const file of fs.readdirSync(iconsDir)) {
+                    const sprites = store(options);
+                    const iconsDir = path.resolve(inputFolder);
+                    for (const file of fs.readdirSync(iconsDir)) {
                         const filepath = path.join(iconsDir, file);
                         const svgid = path.parse(file).name
                         let code = fs.readFileSync(filepath, { encoding: 'utf-8' });
@@ -34,19 +35,19 @@ export const svgstore = (options = {}) => {
                             div.innerHTML = \`${code}\`
                             const svg = div.getElementsByTagName('svg')[0]
                             if (svg) {
-                            svg.style.position = 'absolute'
-                            svg.style.width = 0
-                            svg.style.height = 0
-                            svg.style.overflow = 'hidden'
-                            svg.setAttribute("aria-hidden", "true")
+                                svg.style.position = 'absolute'
+                                svg.style.width = 0
+                                svg.style.height = 0
+                                svg.style.overflow = 'hidden'
+                                svg.setAttribute("aria-hidden", "true")
                             }
                             // listen dom ready event
                             document.addEventListener('DOMContentLoaded', () => {
-                            if (document.body.firstChild) {
-                                document.body.insertBefore(div, document.body.firstChild)
-                            } else {
-                                document.body.appendChild(div)
-                            }
+                                if (document.body.firstChild) {
+                                    document.body.insertBefore(div, document.body.firstChild)
+                                } else {
+                                    document.body.appendChild(div)
+                                }
                             })`
                 }
             }
