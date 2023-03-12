@@ -3,24 +3,25 @@ import fs from 'fs'
 import store from 'svgstore' // 用于制作 SVG Sprites
 import { optimize } from 'svgo' // 用于优化 SVG 文件
 
+// resolveId 和 load 钩子会在每个传入模块请求时被调用
 export const svgstore = (options = {}) => {
     const inputFolder = options.inputFolder || 'src/assets/icons';
     return {
             name: 'svgstore',
             resolveId(id) {
-            if (id === '@svgstore') {
-                return 'svg_bundle.js'
-            }
+                if (id === '@svgstore') {
+                    return 'svg_bundle.js'
+                }
             },
             load(id) {
                 if (id === 'svg_bundle.js') {
-                    const sprites = store(options);
-                    const iconsDir = path.resolve(inputFolder);
-                    for (const file of fs.readdirSync(iconsDir)) {
-                    const filepath = path.join(iconsDir, file);
-                    const svgid = path.parse(file).name
-                    let code = fs.readFileSync(filepath, { encoding: 'utf-8' });
-                    sprites.add(svgid, code)
+                        const sprites = store(options);
+                        const iconsDir = path.resolve(inputFolder);
+                        for (const file of fs.readdirSync(iconsDir)) {
+                        const filepath = path.join(iconsDir, file);
+                        const svgid = path.parse(file).name
+                        let code = fs.readFileSync(filepath, { encoding: 'utf-8' });
+                        sprites.add(svgid, code)
                     }
                     const { data: code } = optimize(sprites.toString({ inline: options.inline }), {
                         plugins: [
