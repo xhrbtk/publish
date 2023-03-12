@@ -36,10 +36,15 @@ export const Welcome = defineComponent({
                 </header>
                 <main class={s.main} ref={main}>
                     <RouterView name="main">
+                        {/* {(obj: any) => <div style="border:1px solid red;"><Transition>{ obj.Component }</Transition></div> } */}
                         {({ Component: X, route: R }: { Component: VNode, route: RouteLocationNormalizedLoaded }) =>
-                            <Transition enterFromClass={s.slide_fade_enter_from} enterActiveClass={s.slide_fade_enter_active}
-                            leaveToClass={s.slide_fade_leave_to} leaveActiveClass={s.slide_fade_leave_active}>
-                            {X}
+                            <Transition 
+                                enterFromClass={s.slide_fade_enter_from} 
+                                enterActiveClass={s.slide_fade_enter_active} 
+                                leaveToClass={s.slide_fade_leave_to} 
+                                leaveActiveClass={s.slide_fade_leave_active}
+                            >
+                                { X }
                             </Transition>
                         }
                     </RouterView>
