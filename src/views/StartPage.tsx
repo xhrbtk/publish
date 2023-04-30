@@ -17,7 +17,7 @@ export const StartPage = defineComponent({
                     {
                         {
                             default: '山竹记账',
-                            icon: <Icon name="add1" class={s.navIcon}></Icon>
+                            icon: <Icon name="menu" class={s.navIcon}></Icon>
                         }
                     }
                 </Navbar>
