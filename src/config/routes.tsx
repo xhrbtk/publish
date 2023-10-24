@@ -12,6 +12,8 @@ import { Welcome } from '../views/Welcome'
 import { ItemPage } from '../views/ItemPage'
 import { ItemList } from '../components/item/ItemList'
 import { ItemCreate } from '../components/item/ItemCreate'
+import { TagPage } from '../views/TagPage'
+import { TagEdit } from '../components/tag/TagEdit'
 
 
 export const routes: RouteRecordRaw[] = [
@@ -33,6 +35,13 @@ export const routes: RouteRecordRaw[] = [
       children: [
         { path: '', component: ItemList },
         { path: 'create', component: ItemCreate },
+      ]
+    },
+    {
+      path: '/tags', component: TagPage,
+      children: [
+        { path: '', component: TagList },
+        { path: ':id', component: TagEdit }
       ]
     }
   ]
