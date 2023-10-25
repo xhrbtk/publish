@@ -42,7 +42,7 @@ export const routes: RouteRecordRaw[] = [
       path: '/tags', component: TagPage,
       children: [
         { path: '', component: TagCreate },
-        { path: ':id', component: TagEdit }
+        { path: ':id/edit', component: TagEdit}
       ]
     }
   ]
